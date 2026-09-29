@@ -204,6 +204,23 @@ function Experience({ companies }) {
   );
 }
 
+function CurrentlyReading({ reading }) {
+  if (!reading || !reading.book) return null;
+  return (
+    <Section id="reading" label="05 — Currently Reading" title="On my desk">
+      <div className={styles.card}>
+        <div className={styles.cardTop}>
+          <h3 className={styles.cardTitle}>{reading.book}</h3>
+        </div>
+        {reading.author && (
+          <p className={styles.cardYear}>by {reading.author}</p>
+        )}
+        {reading.note && <p className={styles.cardDesc}>{reading.note}</p>}
+      </div>
+    </Section>
+  );
+}
+
 function Contact({ contact }) {
   const links = [
     contact.email && { label: "Email", value: contact.email, href: `mailto:${contact.email}` },
@@ -214,7 +231,7 @@ function Contact({ contact }) {
   ].filter(Boolean);
   if (!links.length) return null;
   return (
-    <Section id="contact" label="05 — Contact" title="Let's talk">
+    <Section id="contact" label="06 — Contact" title="Let's talk">
       <ul className={styles.contactList}>
         {links.map((l) => (
           <li key={l.label}>
@@ -256,6 +273,7 @@ export default function App() {
         <Skills skills={p.skills} />
         <Projects projects={p.projects} />
         <Experience companies={p.companies} />
+        <CurrentlyReading reading={p.reading} />
         <Contact contact={p.contact} />
       </main>
 

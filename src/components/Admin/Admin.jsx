@@ -46,6 +46,8 @@ export default function Admin({ onClose, onLogout }) {
     setData((d) => ({ ...d, profile: { ...d.profile, [key]: val } }));
   const setContact = (key, val) =>
     setData((d) => ({ ...d, contact: { ...d.contact, [key]: val } }));
+  const setReading = (key, val) =>
+    setData((d) => ({ ...d, reading: { ...d.reading, [key]: val } }));
 
   const updateItem = (section, idx, key, val) =>
     setData((d) => ({
@@ -194,6 +196,14 @@ export default function Admin({ onClose, onLogout }) {
               onChange={(v) => setContact(key, v)}
             />
           ))}
+        </section>
+
+        {/* Currently Reading */}
+        <section className={styles.card}>
+          <h2 className={styles.h2}>Currently Reading</h2>
+          <Field label="Book" value={data.reading?.book} onChange={(v) => setReading("book", v)} />
+          <Field label="Author" value={data.reading?.author} onChange={(v) => setReading("author", v)} />
+          <Field label="Note (optional)" value={data.reading?.note} onChange={(v) => setReading("note", v)} />
         </section>
 
         {/* Skills */}

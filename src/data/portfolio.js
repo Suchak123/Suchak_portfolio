@@ -113,6 +113,12 @@ export const DEFAULT_PORTFOLIO = {
     },
   ],
 
+  reading: {
+    book: "Designing Data-Intensive Applications",
+    author: "Martin Kleppmann",
+    note: "",
+  },
+
   contact: {
     email: "niraulasuchak@gmail.com",
     github: "github.com/Suchak123",
