@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# Local env files — keep secrets out of version control (.env.example is committed).
+.env
+.env.local
+.env.*.local

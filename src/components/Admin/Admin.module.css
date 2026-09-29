@@ -1,0 +1,160 @@
+.admin {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "JetBrains Mono", monospace;
+  padding: 28px clamp(16px, 5vw, 64px) 80px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+.sub { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+.headerBtns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.primary, .ghost, .danger {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: filter 0.15s, background 0.15s, border-color 0.15s;
+}
+.primary { background: var(--accent-green); color: #0a0b10; border-color: transparent; font-weight: 600; }
+.ghost { background: transparent; color: var(--text); }
+.danger { background: transparent; color: var(--accent-red); border-color: rgba(255,107,107,0.3); }
+.primary:hover { filter: brightness(1.08); }
+.ghost:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.03); }
+.danger:hover { background: rgba(255,107,107,0.08); }
+
+.toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-green);
+  color: #0a0b10;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 20px;
+  z-index: 50;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.span2 { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .span2 { grid-column: auto; }
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.cardHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+  margin-bottom: 14px;
+}
+.cardHead .h2 { margin-bottom: 0; }
+
+.field { margin-bottom: 12px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+
+.label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.input, .textarea, .groupInput {
+  width: 100%;
+  background: var(--bg-1);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 9px 11px;
+  color: var(--text);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus, .textarea:focus, .groupInput:focus {
+  border-color: rgba(110, 219, 143, 0.5);
+}
+.textarea { resize: vertical; line-height: 1.6; }
+
+.entry {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.015);
+}
+
+.skillGroup {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+.skillGroup:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+.skillGroupHead { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.groupInput { max-width: 240px; font-weight: 600; color: var(--accent-amber); }
+
+.skillRow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.skillRow .input { max-width: 200px; }
+.range { flex: 1; accent-color: var(--accent-green); cursor: pointer; }
+.pct { color: var(--accent-blue); font-size: 12px; min-width: 42px; text-align: right; }
+
+.add {
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,0.18);
+  color: var(--accent-green);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+.add:hover { border-color: var(--accent-green); }
+
+.remove {
+  background: transparent;
+  border: none;
+  color: var(--accent-red);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.remove:hover { text-decoration: underline; }

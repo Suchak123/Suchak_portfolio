@@ -1,0 +1,106 @@
+.gate {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.mark {
+  width: 10px;
+  height: 18px;
+  background: var(--amber);
+  box-shadow: 0 0 10px rgba(var(--amber-rgb), 0.65);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.sub {
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+}
+
+.label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.input {
+  width: 100%;
+  margin-top: 6px;
+  background: var(--term-bg);
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 9px 11px;
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus { border-color: var(--amber); }
+
+.error {
+  font-size: 12px;
+  color: var(--accent-red);
+  letter-spacing: 0.01em;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.primary, .ghost {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--line-2);
+  transition: filter 0.15s, background 0.15s, border-color 0.15s;
+}
+.primary {
+  background: var(--amber);
+  color: var(--cta-fg);
+  border-color: transparent;
+  font-weight: 600;
+}
+.primary:hover { filter: brightness(1.08); }
+.ghost { background: transparent; color: var(--muted); }
+.ghost:hover { color: var(--ink); border-color: var(--amber); }

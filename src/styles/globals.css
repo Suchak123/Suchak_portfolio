@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   "Systems Readout" theme.
+   The page is an instrument panel for a systems engineer:
+   cool ink-slate base + amber-phosphor signal (CRT heritage),
+   Chakra Petch (display / HUD) over JetBrains Mono (data / body).
+   ───────────────────────────────────────────────────────────── */
+
+:root,
+:root[data-theme="dark"] {
+  --bg:         #0b0d12;
+  --bg-1:       #0f1218;   /* surface */
+  --bg-2:       #141821;   /* raised panel */
+  --ink:        #eceae1;   /* warm paper white */
+  --fg-rgb:     236, 234, 225;
+  --muted:      rgba(236, 234, 225, 0.46);
+  --faint:      rgba(236, 234, 225, 0.26);
+  --line:       rgba(236, 234, 225, 0.10);
+  --line-2:     rgba(236, 234, 225, 0.18);
+
+  /* signal */
+  --amber:      #f5a623;
+  --amber-hi:   #ffc24b;
+  --amber-rgb:  245, 166, 35;
+  --amber-dim:  rgba(245, 166, 35, 0.14);
+  --steel:      #8aa0be;
+
+  /* terminal semantic colors (a terminal is allowed to be colorful) */
+  --accent-green: #6edb8f;
+  --accent-blue:  #6bcfff;
+  --accent-amber: #ffc24b;
+  --accent-red:   #ff6b6b;
+  --accent-purple:#bf6bff;
+
+  --term-bg:       #0a0c11;
+  --term-titlebar: #12151d;
+  --term-text:     #cbc9c0;
+
+  --nav-bg:    rgba(11, 13, 18, 0.72);
+  --cta-bg:    var(--amber);
+  --cta-fg:    #0b0d12;
+  --grid-line: rgba(236, 234, 225, 0.022);
+  --noise-opacity: 0.35;
+
+  /* back-compat aliases (used by Admin panel) */
+  --text:        var(--ink);
+  --border:      var(--line);
+  --bg-surface:  var(--bg-2);
+
+  color-scheme: dark;
+}
+
+/* ── Light: "blueprint paper" — cool, technical, deep amber ── */
+:root[data-theme="light"] {
+  --bg:         #e6e6df;
+  --bg-1:       #f0f0ea;
+  --bg-2:       #fbfbf6;
+  --ink:        #16191f;
+  --fg-rgb:     22, 25, 31;
+  --muted:      rgba(22, 25, 31, 0.56);
+  --faint:      rgba(22, 25, 31, 0.34);
+  --line:       rgba(22, 25, 31, 0.14);
+  --line-2:     rgba(22, 25, 31, 0.24);
+
+  --amber:      #b4740a;
+  --amber-hi:   #8a5a08;
+  --amber-rgb:  180, 116, 10;
+  --amber-dim:  rgba(180, 116, 10, 0.12);
+  --steel:      #47607f;
+
+  --accent-green: #1f9d57;
+  --accent-blue:  #1f7fd1;
+  --accent-amber: #b4740a;
+  --accent-red:   #d8433a;
+  --accent-purple:#8b3fd1;
+
+  --term-bg:       #f7f6f0;
+  --term-titlebar: #e7e6df;
+  --term-text:     #34373a;
+
+  --nav-bg:    rgba(230, 230, 223, 0.78);
+  --cta-bg:    var(--amber);
+  --cta-fg:    #fbfbf6;
+  --grid-line: rgba(22, 25, 31, 0.03);
+  --noise-opacity: 0.10;
+
+  /* back-compat aliases (used by Admin panel) */
+  --text:        var(--ink);
+  --border:      var(--line);
+  --bg-surface:  var(--bg-2);
+
+  color-scheme: light;
+}
+
+html { scroll-behavior: smooth; }
+html, body, #root { min-height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* faint film-grain / phosphor haze */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--noise-opacity);
+}
+
+::selection {
+  background: rgba(var(--amber-rgb), 0.28);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--fg-rgb), 0.12);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--amber-rgb), 0.5); }
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* shared eyebrow / field-label treatment used across sections */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
