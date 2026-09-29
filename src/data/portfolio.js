@@ -113,6 +113,11 @@ export const DEFAULT_PORTFOLIO = {
     },
   ],
 
+  // Uploaded résumé from the admin panel: { name, dataUrl } or null.
+  // When set, the "Download résumé" button serves this file instead of the
+  // generated PDF.
+  resume: null,
+
   reading: {
     book: "Designing Data-Intensive Applications",
     author: "Martin Kleppmann",

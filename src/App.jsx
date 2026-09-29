@@ -279,11 +279,8 @@ export default function App() {
 
       <footer className={styles.footer}>
         <span>
-          © {new Date().getFullYear()} {p.profile.name}
+          © {new Date().getFullYear()} {p.profile.name}. All rights reserved.
         </span>
-        <a className={styles.adminLink} href="/admin" onClick={(e) => { e.preventDefault(); navigate("/admin"); }}>
-          admin
-        </a>
       </footer>
     </div>
   );

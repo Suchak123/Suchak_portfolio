@@ -205,11 +205,26 @@ function buildPDF(p) {
 // Generate the résumé and trigger a browser download.
 // Returns the filename used.
 export function downloadResume(portfolio) {
-  const bytes = buildPDF(portfolio);
   const name = (portfolio.profile?.name || portfolio.profile?.user || "resume")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+  // Prefer a résumé uploaded via the admin panel (stored as a data URL).
+  const uploaded = portfolio.resume;
+  if (uploaded && uploaded.dataUrl) {
+    const filename = uploaded.name || `${name || "resume"}-resume.pdf`;
+    const a = document.createElement("a");
+    a.href = uploaded.dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    return filename;
+  }
+
+  // Otherwise generate a PDF from the portfolio data.
+  const bytes = buildPDF(portfolio);
   const filename = `${name || "resume"}-resume.pdf`;
 
   const blob = new Blob([bytes], { type: "application/pdf" });

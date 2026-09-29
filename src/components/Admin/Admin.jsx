@@ -121,6 +121,31 @@ export default function Admin({ onClose, onLogout }) {
     URL.revokeObjectURL(url);
   };
 
+  const handleResumeUpload = (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    if (f.type !== "application/pdf") {
+      flash("Résumé must be a PDF.");
+      e.target.value = "";
+      return;
+    }
+    // localStorage caps around ~5MB; base64 adds ~33% overhead.
+    if (f.size > 3 * 1024 * 1024) {
+      flash("PDF too large (max 3MB for browser storage).");
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setData((d) => ({ ...d, resume: { name: f.name, dataUrl: reader.result } }));
+      flash("Résumé attached. Click Save to keep it.");
+    };
+    reader.readAsDataURL(f);
+    e.target.value = "";
+  };
+
+  const removeResume = () => setData((d) => ({ ...d, resume: null }));
+
   const handleImport = (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
@@ -196,6 +221,25 @@ export default function Admin({ onClose, onLogout }) {
               onChange={(v) => setContact(key, v)}
             />
           ))}
+        </section>
+
+        {/* Résumé */}
+        <section className={styles.card}>
+          <h2 className={styles.h2}>Résumé (PDF)</h2>
+          <p className={styles.sub}>
+            {data.resume?.dataUrl
+              ? `Attached: ${data.resume.name || "resume.pdf"}. The "Download résumé" button serves this file.`
+              : "No PDF uploaded — the button generates one from your data. Upload a PDF to override it."}
+          </p>
+          <div className={styles.headerBtns}>
+            <label className={styles.ghost}>
+              {data.resume?.dataUrl ? "Replace PDF" : "Upload PDF"}
+              <input type="file" accept="application/pdf" onChange={handleResumeUpload} hidden />
+            </label>
+            {data.resume?.dataUrl && (
+              <button className={styles.danger} onClick={removeResume}>Remove PDF</button>
+            )}
+          </div>
         </section>
 
         {/* Currently Reading */}
